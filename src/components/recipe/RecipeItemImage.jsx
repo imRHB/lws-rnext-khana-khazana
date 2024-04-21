@@ -1,10 +1,10 @@
 import Image from "next/image";
 
-export default function RecipeItemImage() {
+export default function RecipeItemImage({ image }) {
     return (
         <div className="col-span-12 md:col-span-6">
             <Image
-                src="https://source.unsplash.com/Zh0mYmMBZjQ/600x600"
+                src={image}
                 width={600}
                 height={600}
                 alt=""
