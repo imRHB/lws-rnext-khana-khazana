@@ -14,13 +14,24 @@ export async function createUser(formData) {
     }
 }
 
-export async function verifyUser(credentials) {
+export async function verifyUser(formData) {
     try {
         connectToDatabase();
 
-        const user = await User.findOne(Object.fromEntries(credentials));
+        let credentials = {};
+        credentials.email = formData.get("email");
+        credentials.password = formData.get("password");
 
-        return user;
+        const user = await User.findOne(credentials);
+
+        if (!user) return null;
+
+        return JSON.stringify({
+            firstName: user.firstName,
+            lastName: user.lastName,
+            email: user.email,
+            favourites: user.favourites,
+        });
     } catch (error) {
         console.log(error);
         throw error;

@@ -1,13 +1,40 @@
-import Link from "next/link";
+"use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import useAuth from "@/hooks/useAuth";
 import { verifyUser } from "@/lib/actions/user.action";
 
 export default function LoginPage() {
+    const router = useRouter();
+
+    const { setAuth } = useAuth();
+
+    async function onSubmit(event) {
+        event.preventDefault();
+
+        try {
+            const formData = new FormData(event.currentTarget);
+
+            const response = await verifyUser(formData);
+
+            if (!response) console.log(response);
+            else {
+                setAuth(JSON.parse(response));
+
+                router.push("/");
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <section className="grid h-screen place-items-center">
             <div className="max-w-[450px] w-full mx-auto p-6 border border-gray-700/20 rounded-md">
                 <h4 className="text-2xl font-bold">Sign in</h4>
-                <form className="login-form" action={verifyUser}>
+                <form className="login-form" onSubmit={onSubmit}>
                     <div>
                         <label htmlFor="email">Email Address</label>
                         <input type="email" name="email" id="email" />

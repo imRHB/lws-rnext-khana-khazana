@@ -1,6 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import AuthStatus from "./AuthStatus";
+
+const NAV_ITEMS = [
+    { name: "Home", href: "/", active: true },
+    { name: "Recipe", href: "/", active: false },
+    { name: "About Us", href: "/", active: false },
+];
+
 export default function Navbar() {
     return (
         <nav className="sticky top-0 bg-white">
@@ -15,21 +23,18 @@ export default function Navbar() {
                     />
                 </Link>
 
-                <ul className="flex gap-4 text-sm text-gray-500">
-                    <li className="py-2 active">
-                        <Link href="/">Home</Link>
-                    </li>
+                <ul className="flex items-center gap-4 text-sm text-gray-500">
+                    {NAV_ITEMS.map((item) => (
+                        <li
+                            key={item.name}
+                            className={`py-2 ${item.active && "active"}`}
+                        >
+                            <Link href={item.href}>{item.name}</Link>
+                        </li>
+                    ))}
 
-                    <li className="py-2">
-                        <Link href="/">Recipe</Link>
-                    </li>
-
-                    <li className="py-2">
-                        <Link href="/">About us</Link>
-                    </li>
-
-                    <li className="py-2 bg-[#eb4a36] px-6 rounded-md text-white content-center">
-                        <Link href="/login">Login</Link>
+                    <li>
+                        <AuthStatus />
                     </li>
                 </ul>
             </div>
