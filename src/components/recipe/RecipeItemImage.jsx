@@ -5,7 +5,7 @@ export default function RecipeItemImage({ image }) {
         <div className="col-span-12 md:col-span-6">
             <Image
                 src={image}
-                width={600}
+                width={800}
                 height={600}
                 alt=""
                 className="object-contain w-full h-full rounded-lg"

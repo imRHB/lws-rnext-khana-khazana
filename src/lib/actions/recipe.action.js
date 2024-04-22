@@ -1,7 +1,6 @@
 "use server";
 
 import Recipe from "@/models/recipe.model";
-import { convertToURLString } from "@/utils";
 import { connectToDatabase } from "../mongoose";
 
 export async function getRecipes() {
@@ -72,14 +71,8 @@ export async function getRecipeCategories() {
 
         const recipes = await Recipe.find({});
         const allCategories = recipes.map((recipe) => recipe.category);
-        const uniqueCategories = [...new Set(allCategories)];
 
-        return uniqueCategories.map((category) => {
-            return {
-                name: category,
-                slug: convertToURLString(category),
-            };
-        });
+        return [...new Set(allCategories)];
     } catch (error) {
         console.log(error);
         throw error;

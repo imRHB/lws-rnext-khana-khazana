@@ -11,7 +11,7 @@ export default function MainLayout({ children }) {
     return (
         <React.Fragment>
             <Navbar />
-            <main className="container">{children}</main>;
+            <main className="container my-4">{children}</main>;
         </React.Fragment>
     );
 }
