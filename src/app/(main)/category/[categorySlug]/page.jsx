@@ -1,6 +1,9 @@
 import RecipeCard from "@/components/recipe/RecipeCard";
+import { retrieveOriginalString } from "@/utils";
 
-export default function CategoryWiseRecipePage() {
+export default function CategoryWiseRecipePage({ params: { categorySlug } }) {
+    console.log(retrieveOriginalString(categorySlug));
+
     return (
         <section className="py-8">
             <h3 className="text-xl font-semibold">Appetizers & Snacks</h3>

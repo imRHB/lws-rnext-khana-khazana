@@ -1,27 +1,29 @@
 import Link from "next/link";
 
-export default function RegisterPage() {
+import { createUser } from "@/lib/actions/user.action";
+
+export default async function RegisterPage() {
     return (
         <section className="grid h-screen place-items-center">
             <div className="max-w-[450px] w-full mx-auto p-6 border border-gray-700/20 rounded-md">
                 <h4 className="text-2xl font-bold">Sign Up</h4>
-                <form className="login-form">
+                <form className="login-form" action={createUser}>
                     <div>
-                        <label for="fname">First Name</label>
-                        <input type="text" name="fname" id="fname" />
+                        <label htmlFor="firstName">First Name</label>
+                        <input type="text" name="firstName" id="firstName" />
                     </div>
 
                     <div>
-                        <label for="lname">Last Name</label>
-                        <input type="text" name="lname" id="lname" />
+                        <label htmlFor="lastName">Last Name</label>
+                        <input type="text" name="lastName" id="lastName" />
                     </div>
                     <div>
-                        <label for="email">Email Address</label>
+                        <label htmlFor="email">Email Address</label>
                         <input type="email" name="email" id="email" />
                     </div>
 
                     <div>
-                        <label for="password">Password</label>
+                        <label htmlFor="password">Password</label>
                         <input type="password" name="password" id="password" />
                     </div>
 
