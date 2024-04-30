@@ -1,6 +1,9 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import Recipe from "@/models/recipe.model";
+import User from "@/models/user.model";
 import { connectToDatabase } from "../mongoose";
 
 export async function getRecipes() {
@@ -78,6 +81,58 @@ export async function getRecipeCategories() {
         throw error;
     }
 }
+
+export async function toggleFavouriteRecipe(userEmail, recipeId, path) {
+    try {
+        connectToDatabase();
+
+        const user = await User.findOne({ email: userEmail });
+
+        if (user) {
+            const recipe = user.favourites.includes(recipeId);
+
+            if (recipe) {
+                user.favourites.pull(recipeId);
+            } else {
+                user.favourites.push(recipeId);
+            }
+
+            user.save();
+
+            // revalidatePath(`/recipe/${recipeId}`);
+            revalidatePath(path);
+        } else {
+            console.log("Please login to add the recipe as your favorites");
+        }
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+}
+
+/* export async function isRecipeFavourite(userEmail, recipeId) {
+    let isFavourite;
+
+    try {
+        connectToDatabase();
+
+        const user = await User.findOne({ email: userEmail });
+
+        if (user) {
+            const recipe = user.favourites.find(
+                (id) => id.toString() === recipeId
+            );
+            isFavourite = recipe ? true : false;
+        } else {
+            console.log("Please login to add the recipe as your favorites");
+        }
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+
+    return { isFavourite };
+} */
 
 /* 
 
