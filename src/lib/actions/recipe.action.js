@@ -1,14 +1,13 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
-
 import Recipe from "@/models/recipe.model";
 import User from "@/models/user.model";
+import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
 
 export async function getRecipes() {
     try {
-        connectToDatabase();
+        await connectToDatabase();
 
         const recipes = await Recipe.find({});
 
@@ -21,7 +20,7 @@ export async function getRecipes() {
 
 export async function getRecipesForCard() {
     try {
-        connectToDatabase();
+        await connectToDatabase();
 
         const recipes = await Recipe.find({});
 
@@ -42,7 +41,7 @@ export async function getRecipesForCard() {
 
 export async function getRecipeById(recipeId) {
     try {
-        connectToDatabase();
+        await connectToDatabase();
 
         const recipe = await Recipe.findById(recipeId);
 
@@ -55,7 +54,7 @@ export async function getRecipeById(recipeId) {
 
 export async function getRecipesByCategory(category) {
     try {
-        connectToDatabase();
+        await connectToDatabase();
 
         const recipes = await Recipe.find({
             category: category,
@@ -70,7 +69,7 @@ export async function getRecipesByCategory(category) {
 
 export async function getRecipeCategories() {
     try {
-        connectToDatabase();
+        await connectToDatabase();
 
         const recipes = await Recipe.find({});
         const allCategories = recipes.map((recipe) => recipe.category);
@@ -82,27 +81,39 @@ export async function getRecipeCategories() {
     }
 }
 
-export async function toggleFavouriteRecipe(userEmail, recipeId, path) {
+export async function toggleFavouriteRecipe(email, recipeId) {
     try {
-        connectToDatabase();
+        await connectToDatabase();
 
-        const user = await User.findOne({ email: userEmail });
+        const user = await User.findOne({ email });
+        const recipe = user.favourites.includes(recipeId);
 
-        if (user) {
-            const recipe = user.favourites.includes(recipeId);
-
-            if (recipe) {
-                user.favourites.pull(recipeId);
-            } else {
-                user.favourites.push(recipeId);
-            }
-
-            user.save();
-
-            // revalidatePath(`/recipe/${recipeId}`);
-            revalidatePath(path);
+        if (recipe) {
+            user.favourites.pull(recipeId);
         } else {
-            console.log("Please login to add the recipe as your favorites");
+            user.favourites.push(recipeId);
+        }
+
+        user.save();
+    } catch (error) {
+        console.log(error);
+        throw error;
+    }
+
+    revalidatePath(`/recipe/${recipeId}`);
+}
+
+export async function isRecipeFavourite(email, recipeId) {
+    try {
+        await connectToDatabase();
+
+        if (email && recipeId) {
+            const user = await User.findOne({ email });
+            const favRecipe = user.favourites.includes(recipeId);
+
+            return {
+                favRecipe,
+            };
         }
     } catch (error) {
         console.log(error);
@@ -110,35 +121,11 @@ export async function toggleFavouriteRecipe(userEmail, recipeId, path) {
     }
 }
 
-/* export async function isRecipeFavourite(userEmail, recipeId) {
-    let isFavourite;
-
-    try {
-        connectToDatabase();
-
-        const user = await User.findOne({ email: userEmail });
-
-        if (user) {
-            const recipe = user.favourites.find(
-                (id) => id.toString() === recipeId
-            );
-            isFavourite = recipe ? true : false;
-        } else {
-            console.log("Please login to add the recipe as your favorites");
-        }
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
-
-    return { isFavourite };
-} */
-
 /* 
 
 export async function getRecipeCategories() {
     try {
-        connectToDatabase();
+        await connectToDatabase();
     } catch (error) {
         console.log(error);
         throw error;
