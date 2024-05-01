@@ -1,3 +1,5 @@
+import { notFound } from "next/navigation";
+
 import RecipeItemCookingDetails from "@/components/recipe/RecipeItemCookingDetails";
 import RecipeItemDetails from "@/components/recipe/RecipeItemDetails";
 import RecipeItemImage from "@/components/recipe/RecipeItemImage";
@@ -5,6 +7,8 @@ import { getRecipeById } from "@/lib/actions/recipe.action";
 
 export default async function RecipeDetailsPage({ params: { recipeId } }) {
     const recipe = await getRecipeById(recipeId);
+
+    if (!recipe) notFound();
 
     return (
         <section>

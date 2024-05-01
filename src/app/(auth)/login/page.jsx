@@ -2,11 +2,13 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 import useAuth from "@/hooks/useAuth";
 import { verifyUser } from "@/lib/actions/user.action";
 
 export default function LoginPage() {
+    const [error, setError] = useState(null);
     const router = useRouter();
 
     const { setAuth } = useAuth();
@@ -15,12 +17,15 @@ export default function LoginPage() {
         event.preventDefault();
 
         try {
+            setError(null);
+
             const formData = new FormData(event.currentTarget);
 
             const response = await verifyUser(formData);
 
-            if (!response) console.log(response);
-            else {
+            if (!response) {
+                setError("Invalid credentials");
+            } else {
                 setAuth(JSON.parse(response));
 
                 router.push("/");
@@ -44,6 +49,12 @@ export default function LoginPage() {
                         <label htmlFor="password">Password</label>
                         <input type="password" name="password" id="password" />
                     </div>
+
+                    {error && (
+                        <div className="p-2 rounded-lg bg-red-50">
+                            <p className="text-center text-red-500">{error}</p>
+                        </div>
+                    )}
 
                     <button
                         type="submit"

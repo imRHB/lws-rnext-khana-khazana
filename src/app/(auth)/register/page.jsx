@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { createUser } from "@/lib/actions/user.action";
 
-export default async function RegisterPage() {
+export default function RegisterPage() {
     return (
         <section className="grid h-screen place-items-center">
             <div className="max-w-[450px] w-full mx-auto p-6 border border-gray-700/20 rounded-md">

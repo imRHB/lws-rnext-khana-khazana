@@ -1,10 +1,17 @@
 import RecipeCard from "@/components/recipe/RecipeCard";
-import { getRecipesByCategory } from "@/lib/actions/recipe.action";
+import {
+    getRecipeCategories,
+    getRecipesByCategory,
+} from "@/lib/actions/recipe.action";
 import { decodeURIString } from "@/utils";
+import { notFound } from "next/navigation";
 
 export default async function CategoryWiseRecipePage({
     params: { categorySlug },
 }) {
+    const categories = await getRecipeCategories();
+    if (!categories.includes(decodeURIString(categorySlug))) notFound();
+
     const recipes = await getRecipesByCategory(decodeURIString(categorySlug));
 
     return (
