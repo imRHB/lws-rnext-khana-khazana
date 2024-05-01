@@ -1,10 +1,27 @@
+import { notFound } from "next/navigation";
+
 import RecipeCard from "@/components/recipe/RecipeCard";
 import {
     getRecipeCategories,
     getRecipesByCategory,
 } from "@/lib/actions/recipe.action";
 import { decodeURIString } from "@/utils";
-import { notFound } from "next/navigation";
+
+export async function generateMetadata({ params: { categorySlug } }) {
+    const categories = await getRecipeCategories();
+    const isCategoryExist = categories.includes(decodeURIString(categorySlug));
+
+    return {
+        title: `Khana Khazan | ${
+            isCategoryExist
+                ? `Category - ${decodeURIString(categorySlug)}`
+                : "Category not found"
+        }`,
+        description: `All delicious recipes from ${decodeURIString(
+            categorySlug
+        )}.`,
+    };
+}
 
 export default async function CategoryWiseRecipePage({
     params: { categorySlug },

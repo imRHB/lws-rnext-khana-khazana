@@ -2,6 +2,11 @@ import Link from "next/link";
 
 import { createUser } from "@/lib/actions/user.action";
 
+export const metadata = {
+    title: "Khana Khazana | Create a new account",
+    description: "Create a new Khana Khazana account.",
+};
+
 export default function RegisterPage() {
     return (
         <section className="grid h-screen place-items-center">

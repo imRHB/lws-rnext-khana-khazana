@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 export const metadata = {
-    title: "Khana Khazan",
+    title: "Khana Khazan | Not found",
     description: "An online based recipe site powered by Learn With Sumit.",
 };
 

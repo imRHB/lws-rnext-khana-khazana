@@ -5,6 +5,15 @@ import RecipeItemDetails from "@/components/recipe/RecipeItemDetails";
 import RecipeItemImage from "@/components/recipe/RecipeItemImage";
 import { getRecipeById } from "@/lib/actions/recipe.action";
 
+export async function generateMetadata({ params: { recipeId } }) {
+    const recipe = await getRecipeById(recipeId);
+
+    return {
+        title: `Khana Khazan | ${recipe ? recipe?.name : "Recipe not found"}`,
+        description: `${recipe?.description}`,
+    };
+}
+
 export default async function RecipeDetailsPage({ params: { recipeId } }) {
     const recipe = await getRecipeById(recipeId);
 
