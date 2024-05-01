@@ -19,7 +19,7 @@ export default function Favourite({ recipeId }) {
         async function fetchFavRecipe() {
             try {
                 const response = await isRecipeFavourite(auth?.email, recipeId);
-                setFavRecipe(response.favRecipe);
+                setFavRecipe(response?.favRecipe);
             } catch (error) {
                 console.error(error);
             }

@@ -14,7 +14,7 @@ export default function Share() {
     return (
         <div className="relative">
             <div
-                class="flex gap-2 text-gray-600 cursor-pointer hover:text-[#0E79F6]"
+                className="flex gap-2 text-gray-600 cursor-pointer hover:text-[#0E79F6]"
                 onClick={handleToggleVisibility}
             >
                 <svg
@@ -24,9 +24,9 @@ export default function Share() {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                 >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M6 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
