@@ -57,3 +57,11 @@ export default async function CategoryWiseRecipePage({
         </section>
     );
 }
+
+export async function generateStaticParams() {
+    const categoryList = await getRecipeCategories();
+
+    return categoryList.map((category) => ({
+        categorySlug: category,
+    }));
+}

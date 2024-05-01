@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import RecipeItemCookingDetails from "@/components/recipe/RecipeItemCookingDetails";
 import RecipeItemDetails from "@/components/recipe/RecipeItemDetails";
 import RecipeItemImage from "@/components/recipe/RecipeItemImage";
-import { getRecipeById } from "@/lib/actions/recipe.action";
+import { getRecipeById, getRecipes } from "@/lib/actions/recipe.action";
 
 export async function generateMetadata({ params: { recipeId } }) {
     const recipe = await getRecipeById(recipeId);
@@ -29,4 +29,12 @@ export default async function RecipeDetailsPage({ params: { recipeId } }) {
             <RecipeItemCookingDetails steps={recipe.steps} />
         </section>
     );
+}
+
+export async function generateStaticParams() {
+    const recipes = await getRecipes();
+
+    return recipes.map((recipe) => ({
+        recipeId: recipe._id.toString(),
+    }));
 }

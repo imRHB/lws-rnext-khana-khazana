@@ -100,7 +100,7 @@ export async function toggleFavouriteRecipe(email, recipeId) {
         throw error;
     }
 
-    revalidatePath(`/recipe/${recipeId}`);
+    revalidatePath("/");
 }
 
 export async function isRecipeFavourite(email, recipeId) {
