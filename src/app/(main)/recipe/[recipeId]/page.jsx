@@ -10,13 +10,21 @@ export async function generateMetadata({ params: { recipeId } }) {
 
     return {
         title: `Khana Khazan | ${recipe ? recipe?.name : "Recipe not found"}`,
-        description: recipe?.description,
+        description: recipe.description,
         openGraph: {
             title: `Khana Khazana | ${
                 recipe ? recipe?.name : "Recipe not found"
             }`,
             description: recipe?.description,
-            images: [recipe?.image],
+            siteName: "Khana Khazana",
+            images: [
+                {
+                    url: recipe?.image,
+                    width: 1200,
+                    height: 630,
+                    alt: recipe?.name,
+                },
+            ],
         },
     };
 }
