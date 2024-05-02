@@ -95,12 +95,11 @@ export async function toggleFavouriteRecipe(email, recipeId) {
         }
 
         user.save();
+        revalidatePath("/");
     } catch (error) {
         console.log(error);
         throw error;
     }
-
-    revalidatePath("/");
 }
 
 export async function isRecipeFavourite(email, recipeId) {

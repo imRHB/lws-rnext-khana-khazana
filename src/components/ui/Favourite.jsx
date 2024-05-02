@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState, useTransition } from "react";
+import React, { useCallback, useEffect, useState, useTransition } from "react";
 import { toast } from "react-toastify";
 
 import useAuth from "@/hooks/useAuth";
@@ -15,27 +15,29 @@ export default function Favourite({ recipeId }) {
 
     const { auth } = useAuth();
 
-    useEffect(() => {
-        async function fetchFavRecipe() {
-            try {
-                const response = await isRecipeFavourite(auth?.email, recipeId);
-                setFavRecipe(response?.favRecipe);
-            } catch (error) {
-                console.error(error);
-            }
+    const fetchFavRecipe = useCallback(async () => {
+        try {
+            const response = await isRecipeFavourite(auth?.email, recipeId);
+            setFavRecipe(response?.favRecipe);
+        } catch (error) {
+            console.error(error);
         }
-
-        fetchFavRecipe();
     }, [auth?.email, recipeId]);
 
-    async function toggleFavourite() {
+    useEffect(() => {
+        fetchFavRecipe();
+    }, [fetchFavRecipe]);
+
+    const toggleFavourite = useCallback(async () => {
         if (!auth) {
             toast.warning("Please login to add this recipe as your favorite.");
             return;
         }
 
         await toggleFavouriteRecipe(auth?.email, recipeId);
-    }
+
+        fetchFavRecipe();
+    }, [auth, recipeId, fetchFavRecipe]);
 
     return (
         <React.Fragment>
