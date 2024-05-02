@@ -17,18 +17,16 @@ export const metadata = {
     title: "Khana Khazana",
     description: "An online based recipe site powered by Learn With Sumit.",
     openGraph: {
+        url: process.env.NEXT_PUBLIC_APP_URL,
+        siteName: "Khana Khazana",
         images: [
             {
                 url: "/og.png",
                 width: 1200,
                 height: 630,
             },
-            {
-                url: `${process.env.NEXT_PUBLIC_APP_URL}/api/og`,
-                width: 1200,
-                height: 630,
-            },
         ],
+        type: "website",
     },
 };
 

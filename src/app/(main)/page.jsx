@@ -7,12 +7,7 @@ export const metadata = {
     openGraph: {
         images: [
             {
-                url: "../../public/og.png",
-                width: 1200,
-                height: 630,
-            },
-            {
-                url: `${process.env.NEXT_PUBLIC_APP_URL}/api/og`,
+                url: "/og.png",
                 width: 1200,
                 height: 630,
             },
