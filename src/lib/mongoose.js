@@ -1,4 +1,4 @@
-/* import mongoose from "mongoose";
+import mongoose from "mongoose";
 
 const MONGODB_URI = process.env.MONGODB_URI;
 const cached = { connection: undefined, promise: undefined };
@@ -17,7 +17,7 @@ export const connectToDatabase = async () => {
     if (!cached.promise) {
         const opts = {
             bufferCommands: false,
-            // dbName: "khanaKhazana",
+            dbName: "khanaKhazana",
         };
         cached.promise = mongoose.connect(MONGODB_URI, opts);
     }
@@ -31,9 +31,8 @@ export const connectToDatabase = async () => {
 
     return cached.connection;
 };
- */
 
-import mongoose from "mongoose";
+/* import mongoose from "mongoose";
 
 export const connectToDatabase = async () => {
     mongoose.set("strictQuery", true);
@@ -50,4 +49,4 @@ export const connectToDatabase = async () => {
     } catch (error) {
         console.error(error);
     }
-};
+}; */
