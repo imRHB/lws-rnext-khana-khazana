@@ -14,9 +14,9 @@ const poppins = Poppins({
 
 export const metadata = {
     metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL),
-    title: "Khana Khazana",
-    description: "An online based recipe site powered by Learn With Sumit.",
     openGraph: {
+        title: "Khana Khazana",
+        description: "An online based recipe site powered by Learn With Sumit.",
         url: process.env.NEXT_PUBLIC_APP_URL,
         siteName: "Khana Khazana",
         images: [
