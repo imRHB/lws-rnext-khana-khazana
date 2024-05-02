@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-export default function ErrorPage({ error, reset }) {
+export default function GlobalErrorPage({ error, reset }) {
     const [stateError, setStateError] = useState(null);
 
     useEffect(() => {

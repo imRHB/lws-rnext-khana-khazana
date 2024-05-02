@@ -1,8 +1,9 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
+
 import Recipe from "@/models/recipe.model";
 import User from "@/models/user.model";
-import { revalidatePath } from "next/cache";
 import { connectToDatabase } from "../mongoose";
 
 export async function getRecipes() {
@@ -119,16 +120,3 @@ export async function isRecipeFavourite(email, recipeId) {
         throw error;
     }
 }
-
-/* 
-
-export async function getRecipeCategories() {
-    try {
-        await connectToDatabase();
-    } catch (error) {
-        console.log(error);
-        throw error;
-    }
-}
-
-*/
