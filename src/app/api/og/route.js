@@ -6,7 +6,7 @@ export async function GET() {
             <div
                 style={{
                     fontSize: 128,
-                    background: "white",
+                    background: "#FAFAFA",
                     width: "100%",
                     height: "100%",
                     display: "flex",
@@ -15,7 +15,7 @@ export async function GET() {
                     justifyContent: "center",
                 }}
             >
-                Hello world!
+                Khana Khazana
             </div>
         ),
         {
