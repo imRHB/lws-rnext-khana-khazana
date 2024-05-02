@@ -15,6 +15,9 @@ const poppins = Poppins({
 export const metadata = {
     title: "Khana Khazana",
     description: "An online based recipe site powered by Learn With Sumit.",
+    openGraph: {
+        images: [{ url: `${process.env.NEXT_PUBLIC_APP_URL}/og.png` }],
+    },
 };
 
 export default function RootLayout({ children }) {
