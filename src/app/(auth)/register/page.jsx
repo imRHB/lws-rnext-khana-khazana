@@ -1,6 +1,7 @@
 import Link from "next/link";
+import React from "react";
 
-import { createUser } from "@/lib/actions/user.action";
+import SignUpForm from "@/components/form/SignUpForm";
 
 export const metadata = {
     title: "Khana Khazana | Create a new account",
@@ -9,46 +10,24 @@ export const metadata = {
 
 export default function RegisterPage() {
     return (
-        <section className="grid h-screen place-items-center">
-            <div className="max-w-[450px] w-full mx-auto p-6 border border-gray-700/20 rounded-md">
-                <h4 className="text-2xl font-bold">Sign Up</h4>
-                <form className="login-form" action={createUser}>
-                    <div>
-                        <label htmlFor="firstName">First Name</label>
-                        <input type="text" name="firstName" id="firstName" />
-                    </div>
+        <React.Fragment>
+            <section className="grid h-screen place-items-center">
+                <div className="max-w-[450px] w-full mx-auto p-6 border border-gray-700/20 rounded-md bg-white">
+                    <h4 className="text-2xl font-bold">Sign Up</h4>
+                    <SignUpForm />
 
-                    <div>
-                        <label htmlFor="lastName">Last Name</label>
-                        <input type="text" name="lastName" id="lastName" />
-                    </div>
-                    <div>
-                        <label htmlFor="email">Email Address</label>
-                        <input type="email" name="email" id="email" />
-                    </div>
+                    <p className="text-xs text-center text-gray-600">Or</p>
 
-                    <div>
-                        <label htmlFor="password">Password</label>
-                        <input type="password" name="password" id="password" />
-                    </div>
-
-                    <button
-                        type="submit"
-                        className="bg-[#eb4a36] py-3 rounded-md text-white w-full mt-4"
+                    <Link
+                        href="/login"
+                        className="block mx-auto mt-4 text-sm text-center text-gray-600 underline"
                     >
-                        Create Account
-                    </button>
-                </form>
+                        Login
+                    </Link>
+                </div>
+            </section>
 
-                <p className="text-xs text-center text-gray-600">Or</p>
-
-                <Link
-                    href="/login"
-                    className="block mx-auto mt-4 text-sm text-center text-gray-600 underline"
-                >
-                    Login
-                </Link>
-            </div>
-        </section>
+            <div className="absolute inset-0 h-full w-full bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:32px_32px] -z-50" />
+        </React.Fragment>
     );
 }

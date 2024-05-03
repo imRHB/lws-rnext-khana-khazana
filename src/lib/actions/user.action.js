@@ -7,6 +7,15 @@ export async function createUser(formData) {
     try {
         connectToDatabase();
 
+        const email = formData.get("email");
+
+        const isUserExists = await User.findOne({ email });
+
+        if (isUserExists)
+            return {
+                error: { message: "User exists with this email" },
+            };
+
         await User.create(Object.fromEntries(formData));
     } catch (error) {
         console.log(error);
@@ -18,13 +27,15 @@ export async function verifyUser(formData) {
     try {
         connectToDatabase();
 
-        let credentials = {};
-        credentials.email = formData.get("email");
-        credentials.password = formData.get("password");
+        const email = formData.get("email");
+        const password = formData.get("password");
 
-        const user = await User.findOne(credentials);
+        const user = await User.findOne({ email, password }).exec();
 
-        if (!user) return null;
+        if (!user)
+            return {
+                error: { message: "Invalid email or password" },
+            };
 
         return JSON.stringify({
             firstName: user.firstName,
