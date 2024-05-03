@@ -15,7 +15,7 @@ export default function SignInForm() {
     const {
         register,
         handleSubmit,
-        formState: { errors },
+        formState: { errors, isSubmitting },
     } = useForm({
         defaultValues: {
             email: "",
@@ -60,6 +60,7 @@ export default function SignInForm() {
                         id="email"
                         placeholder="mail@example.com"
                         className="bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg block w-full p-2.5"
+                        disabled={isSubmitting}
                     />
                 </Field>
 
@@ -77,6 +78,7 @@ export default function SignInForm() {
                         id="password"
                         placeholder="* * * * * *"
                         className="bg-gray-50 border border-gray-200 text-gray-700 text-sm rounded-lg block w-full p-2.5"
+                        disabled={isSubmitting}
                     />
                 </Field>
 
@@ -90,7 +92,8 @@ export default function SignInForm() {
 
                 <button
                     type="submit"
-                    className="bg-[#eb4a36] py-3 rounded-md text-white w-full mt-4"
+                    className="bg-[#eb4a36] py-3 rounded-md text-white w-full mt-4 disabled:bg-opacity-50 disabled:cursor-not-allowed"
+                    disabled={isSubmitting}
                 >
                     Login
                 </button>

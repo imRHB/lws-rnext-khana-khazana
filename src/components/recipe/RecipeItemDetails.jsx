@@ -107,7 +107,7 @@ export default function RecipeItemDetails({ recipe }) {
                     <span>Favourite</span>
                 </div> */}
 
-                <Favourite recipeId={_id.toString()} />
+                <Favourite recipeId={_id.toString()} name={name} />
                 <Share />
             </div>
         </div>

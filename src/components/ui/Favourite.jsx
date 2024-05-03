@@ -9,7 +9,7 @@ import {
     toggleFavouriteRecipe,
 } from "@/lib/actions/recipe.action";
 
-export default function Favourite({ recipeId }) {
+export default function Favourite({ recipeId, name }) {
     const [isPending, startTransition] = useTransition();
     const [favRecipe, setFavRecipe] = useState(null);
 
@@ -30,14 +30,22 @@ export default function Favourite({ recipeId }) {
 
     const toggleFavourite = useCallback(async () => {
         if (!auth) {
-            toast.warning("Please login to add this recipe as your favorite.");
+            toast.warning("Please login to add this recipe as your favorite");
+
             return;
         }
 
         await toggleFavouriteRecipe(auth?.email, recipeId);
+        toast.success(
+            `${
+                favRecipe
+                    ? `${name} has been removed from your favourite list`
+                    : `${name} has been added to your favourite list`
+            }`
+        );
 
         fetchFavRecipe();
-    }, [auth, recipeId, fetchFavRecipe]);
+    }, [auth, recipeId, fetchFavRecipe, favRecipe, name]);
 
     return (
         <React.Fragment>
