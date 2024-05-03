@@ -12,18 +12,31 @@ export default function LoginPage() {
     return (
         <React.Fragment>
             <section className="grid h-screen place-items-center">
-                <div className="max-w-[450px] w-full mx-auto p-6 border border-gray-700/20 rounded-md bg-white">
-                    <h4 className="text-2xl font-bold">Sign in</h4>
+                <div className="w-full max-w-[450px] mx-auto bg-white divide-y rounded-md divide-slate-700/20 ring-1 ring-slate-700/20">
+                    <div className="p-4 space-y-4 sm:px-8 sm:py-6">
+                        <h2 className="text-2xl font-bold text-center uppercase text-slate-700">
+                            Login
+                        </h2>
+                        <p className="text-center text-slate-600">
+                            Login to your Khana Khazana account
+                        </p>
+                    </div>
+
                     <SignInForm />
 
-                    <p className="text-xs text-center text-gray-600">Or</p>
-
-                    <Link
-                        href="/register"
-                        className="block mx-auto mt-4 text-sm text-center text-gray-600 underline"
-                    >
-                        Create New Account
-                    </Link>
+                    <div className="p-4 space-y-4 sm:px-8 sm:py-6">
+                        <p className="text-center text-slate-700">
+                            Don&apos; have an account?
+                        </p>
+                        <p className="text-center">
+                            <Link
+                                href="/register"
+                                className="text-violet-400 hover:text-violet-500 hover:underline underline-offset-2"
+                            >
+                                Register
+                            </Link>
+                        </p>
+                    </div>
                 </div>
             </section>
 
