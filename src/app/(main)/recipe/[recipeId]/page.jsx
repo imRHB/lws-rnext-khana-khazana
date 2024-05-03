@@ -24,6 +24,8 @@ export async function generateMetadata({ params: { recipeId } }) {
                     alt: recipe?.name,
                 },
             ],
+            siteName: "Khana Khazana",
+            type: "website",
         },
     };
 }

@@ -5,7 +5,10 @@ export default function RecipeCard({ recipe }) {
     const { _id, name, author, thumbnail, rating } = recipe || {};
 
     return (
-        <div className="card">
+        <div className="relative card">
+            <Link href={`/recipe/${_id}`}>
+                <span className="absolute inset-0" />
+            </Link>
             <Image
                 src={thumbnail}
                 width={300}
@@ -13,9 +16,8 @@ export default function RecipeCard({ recipe }) {
                 className="w-[300px] h-[160px] rounded-md"
                 alt={name}
             />
-            <h4 className="my-2">
-                <Link href={`/recipe/${_id}`}>{name}</Link>
-            </h4>
+
+            <h4 className="my-2">{name}</h4>
             <div className="flex justify-between py-2 text-xs text-gray-500">
                 <span>⭐️ {rating}</span>
                 <span>By: {author}</span>
