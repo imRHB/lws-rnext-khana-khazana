@@ -28,6 +28,19 @@ export const metadata = {
         ],
         type: "website",
     },
+    twitter: {
+        card: "summary_large_image",
+        title: "Khana Khazana",
+        description: "An online based recipe site powered by Learn With Sumit.",
+        creator: "@imprantu",
+        images: [
+            {
+                url: "/og.png",
+                width: 1200,
+                height: 630,
+            },
+        ],
+    },
 };
 
 export default function RootLayout({ children }) {

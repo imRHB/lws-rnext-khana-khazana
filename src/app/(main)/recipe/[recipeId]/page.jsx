@@ -9,7 +9,7 @@ export async function generateMetadata({ params: { recipeId } }) {
     const recipe = await getRecipeById(recipeId);
 
     return {
-        title: `Khana Khazan | ${recipe ? recipe?.name : "Recipe not found"}`,
+        title: `Khana Khazana | ${recipe ? recipe?.name : "Recipe not found"}`,
         description: recipe?.description,
         openGraph: {
             title: `Khana Khazana | ${
@@ -26,6 +26,22 @@ export async function generateMetadata({ params: { recipeId } }) {
             ],
             siteName: "Khana Khazana",
             type: "website",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: `Khana Khazana | ${
+                recipe ? recipe?.name : "Recipe not found"
+            }`,
+            description: recipe?.description,
+            creator: "@imprantu",
+            images: [
+                {
+                    url: recipe?.image,
+                    width: 1200,
+                    height: 630,
+                    alt: recipe?.name,
+                },
+            ],
         },
     };
 }

@@ -12,14 +12,46 @@ export async function generateMetadata({ params: { categorySlug } }) {
     const isCategoryExist = categories.includes(decodeURIString(categorySlug));
 
     return {
-        title: `Khana Khazan | ${
-            isCategoryExist
-                ? `Category - ${decodeURIString(categorySlug)}`
-                : "Category not found"
-        }`,
-        description: `All delicious recipes from ${decodeURIString(
-            categorySlug
-        )}.`,
+        metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL),
+        openGraph: {
+            title: `Khana Khazana | ${
+                isCategoryExist
+                    ? `Category - ${decodeURIString(categorySlug)}`
+                    : "Category not found"
+            }`,
+            description: `All delicious recipes from ${decodeURIString(
+                categorySlug
+            )}.`,
+            url: process.env.NEXT_PUBLIC_APP_URL,
+            siteName: "Khana Khazana",
+            images: [
+                {
+                    url: "/og.png",
+                    width: 1200,
+                    height: 630,
+                },
+            ],
+            type: "website",
+        },
+        twitter: {
+            card: "summary_large_image",
+            title: `Khana Khazana | ${
+                isCategoryExist
+                    ? `Category - ${decodeURIString(categorySlug)}`
+                    : "Category not found"
+            }`,
+            description: `All delicious recipes from ${decodeURIString(
+                categorySlug
+            )}.`,
+            creator: "@imprantu",
+            images: [
+                {
+                    url: "/og.png",
+                    width: 1200,
+                    height: 630,
+                },
+            ],
+        },
     };
 }
 
